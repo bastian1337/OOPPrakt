@@ -41,14 +41,21 @@ public class MoebelhausControl {
     }
 
 
-	public void leseAusDatei(String string) {
+	public void leseAusDatei(String typ) {
 
 		try {
-			model.leseAusDatei(string);
-			view.zeigeInformationsfensterAn("Gelesen!");
+			switch(typ) {
+				case "csv":
+					model.leseAusCsvDatei();
+					view.zeigeInformationsfensterAn("CSV Gelesen!");
+					break;
+				case "txt":
+					model.leseAusTxtDatei();
+					view.zeigeInformationsfensterAn("TXT Gelesen!");
+					break;
+			}
 		} catch (Exception e) {
 			view.zeigeFehlermeldungsfensterAn("Fehler: " + e.getMessage());
-			System.out.println(e.getMessage());
 		}
 	}
 

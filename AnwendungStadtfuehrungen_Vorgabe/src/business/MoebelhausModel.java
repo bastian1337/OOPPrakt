@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import fileCreatorsRoss.ConcreateCreatorAB;
-import fileCreatorsRoss.ReaderProductRoss;
+import factory.ConcreteCsvReaderCreator;
+import factory.ConcreteTxtReaderCreator;
+import factory.ReaderCreator;
+import factory.ReaderProduct;
 
 public class MoebelhausModel {
 	
@@ -21,28 +23,6 @@ public class MoebelhausModel {
 		this.moebelstueck = moebelstueck;
 	}
     
-    public void leseAusDatei(String typ) throws IOException {
-//      		if("csv".equals(typ)){
-//      			BufferedReader ein = new BufferedReader(new FileReader("Moebelstueck.csv"));
-//      			String[] zeile = ein.readLine().split(";");
-//      			this.moebelstueck = new Moebelstueck(zeile[0], 
-//      				zeile[1], 
-//      				zeile[2], 
-//      				Float.parseFloat(zeile[3]), 
-//      				zeile[4].split("_"));
-//      				ein.close();
-//      		}
-    	
-    	ConcreateCreatorAB cb = new ConcreateCreatorAB();
-    	ReaderProductRoss rb = cb.factoryMethod(typ);
-    	String[] zeile = rb.leseAusDatei();
-			this.moebelstueck = new Moebelstueck(zeile[0], 
-      				zeile[1], 
-      				zeile[2], 
-      				Float.parseFloat(zeile[3]), 
-      				zeile[4].split("_"));
-      			rb.schliesseDatei();
-	}
 		
 
 
@@ -51,5 +31,29 @@ public class MoebelhausModel {
 				= new BufferedWriter(new FileWriter("MoebelstueckeAusgabe.csv", true));
 			aus.write(moebelstueck.gibMoebelstueckZurueck(';'));
 			aus.close();
+	}
+	
+	public void leseAusTxtDatei() throws IOException {
+		ReaderCreator rc = new ConcreteTxtReaderCreator();
+		ReaderProduct rp = rc.factoryMethod();
+		String[] inhalt = rp.leseAusDatei();
+		this.moebelstueck = new Moebelstueck(inhalt[0], 
+				inhalt[1], 
+				inhalt[2], 
+				Float.parseFloat(inhalt[3]), 
+				inhalt[4].split("_"));
+		rp.schliesseDatei();
+	}
+	
+	public void leseAusCsvDatei() throws IOException {
+		ReaderCreator rc = new ConcreteCsvReaderCreator();
+		ReaderProduct rp = rc.factoryMethod();
+		String[] inhalt = rp.leseAusDatei();
+		this.moebelstueck = new Moebelstueck(inhalt[0], 
+				inhalt[1], 
+				inhalt[2], 
+				Float.parseFloat(inhalt[3]), 
+				inhalt[4].split("_"));
+		rp.schliesseDatei();
 	}
 }
