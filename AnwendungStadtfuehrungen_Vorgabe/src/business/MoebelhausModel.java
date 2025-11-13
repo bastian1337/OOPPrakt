@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import fileCreatorsRoss.ConcreateCreatorAB;
+import fileCreatorsRoss.ReaderProductRoss;
+
 public class MoebelhausModel {
 	
     private Moebelstueck moebelstueck;
@@ -19,16 +22,26 @@ public class MoebelhausModel {
 	}
     
     public void leseAusDatei(String typ) throws IOException {
-      		if("csv".equals(typ)){
-      			BufferedReader ein = new BufferedReader(new FileReader("Moebelstueck.csv"));
-      			String[] zeile = ein.readLine().split(";");
-      			this.moebelstueck = new Moebelstueck(zeile[0], 
+//      		if("csv".equals(typ)){
+//      			BufferedReader ein = new BufferedReader(new FileReader("Moebelstueck.csv"));
+//      			String[] zeile = ein.readLine().split(";");
+//      			this.moebelstueck = new Moebelstueck(zeile[0], 
+//      				zeile[1], 
+//      				zeile[2], 
+//      				Float.parseFloat(zeile[3]), 
+//      				zeile[4].split("_"));
+//      				ein.close();
+//      		}
+    	
+    	ConcreateCreatorAB cb = new ConcreateCreatorAB();
+    	ReaderProductRoss rb = cb.factoryMethod(typ);
+    	String[] zeile = rb.leseAusDatei();
+			this.moebelstueck = new Moebelstueck(zeile[0], 
       				zeile[1], 
       				zeile[2], 
       				Float.parseFloat(zeile[3]), 
       				zeile[4].split("_"));
-      				ein.close();
-      		}
+      			rb.schliesseDatei();
 	}
 		
 

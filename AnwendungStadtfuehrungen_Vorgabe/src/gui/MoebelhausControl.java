@@ -48,6 +48,7 @@ public class MoebelhausControl {
 			view.zeigeInformationsfensterAn("Gelesen!");
 		} catch (Exception e) {
 			view.zeigeFehlermeldungsfensterAn("Fehler: " + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
