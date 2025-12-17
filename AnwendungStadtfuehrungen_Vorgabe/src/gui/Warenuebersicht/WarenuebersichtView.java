@@ -18,8 +18,8 @@ private WarenuebersichtControl
 private MoebelhausModel moebelModel;		
     	//---Anfang Attribute der grafischen Oberflaeche---
     	private Pane pane = new  Pane();
-    	private Label lblAnzeigeMoebel     
- 		= new Label("Anzeige Möbelstücke");
+		private Label lblAnzeigeMoebel     
+			= new Label("Anzeige Moebelstuecke");
     	public TextArea txtAnzeigeMoebel  = new TextArea();
     	private Button btnAnzeigeMoebel = new Button("Anzeige");
     	//-------Ende Attribute der grafischen Oberflaeche-------
@@ -81,8 +81,8 @@ private MoebelhausModel moebelModel;
     			}
     		}
     		else{
-    			zeigeInformationsfensterAn(
- 				"Bisher wurde kein Moebelstück aufgenommen!");
+				zeigeInformationsfensterAn(
+			"Bisher wurde kein Moebelstueck aufgenommen!");
     		}
     }	
    

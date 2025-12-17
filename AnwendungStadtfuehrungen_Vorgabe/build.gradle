@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+application {
+    mainClass = 'main.Main'
+    // Keep resources and arguments consistent when running from Gradle
+    applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8']
+}
+
+def javafxVersion = '23.0.2'
+def classifierSuffix
+
+def osName = System.getProperty('os.name').toLowerCase()
+def osArch = System.getProperty('os.arch').toLowerCase()
+if (osName.contains('mac')) {
+    classifierSuffix = osArch == 'aarch64' ? 'mac-aarch64' : 'mac'
+} else if (osName.contains('win')) {
+    classifierSuffix = 'win'
+} else {
+    classifierSuffix = 'linux'
+}
+
+def javafxModules = ['base', 'graphics', 'controls', 'fxml']
+
+dependencies {
+    javafxModules.forEach { module ->
+        implementation "org.openjfx:javafx-${module}:${javafxVersion}:${classifierSuffix}"
+    }
+}
+
+tasks.named('run', JavaExec).configure {
+    def javafxModulePath = configurations.runtimeClasspath.asPath
+    jvmArgs = [
+        '--module-path', javafxModulePath,
+        '--add-modules', 'javafx.controls,javafx.fxml'
+    ]
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
