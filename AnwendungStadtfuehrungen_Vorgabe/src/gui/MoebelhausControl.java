@@ -2,28 +2,31 @@ package gui;
 
 import business.MoebelhausModel;
 import business.Moebelstueck;
+import gui.Warenuebersicht.WarenuebersichtView;
 import javafx.stage.Stage;
+import ownUtil.Observer;
 
-public class MoebelhausControl {
+public class MoebelhausControl implements Observer {
 	
 	MoebelhausView view;
 	MoebelhausModel model;
-	
+		
 	public MoebelhausControl(Stage stage) {
 		this.view = new MoebelhausView(stage, this);
-		this.model = new MoebelhausModel();
+		this.model = MoebelhausModel.getInstance();
+		model.addObserver(this);
 	}
 	
 	
     public void nehmeMoebelstueckAuf(){
     	try{ 
-    		model.setMoebelstueck(new Moebelstueck(
+    		model.addMoebelstueck(new Moebelstueck(
         			view.txtName.getText(), 
        	            view.txtWohnraum.getText(),
        	            view.txtStil.getText(),
        	            Float.parseFloat(view.txtPreis.getText()),
         		    view.txtMaterialien.getText().split(";")));
-    		
+    		view.zeigeInformationsfensterAn("Aufgenommen!");
        	}
        	catch(Exception exc){
        		view.zeigeFehlermeldungsfensterAn(exc.getMessage());
@@ -31,14 +34,12 @@ public class MoebelhausControl {
     }
    
     public void zeigeMoebelstueckAn(){
-    	if(model.getMoebelstueck() != null){
-    		view.txtAnzeige.setText(
-    			model.getMoebelstueck().gibMoebelstueckZurueck(' '));
-    	}
-    	else{
-    		view.zeigeInformationsfensterAn("Bisher wurde keine Moebelstueck aufgenommen!");
-    	}
-    }
+
+    				model.notifyObservers();
+    			}
+    	
+    	
+    
 
 
 	public void leseAusDatei(String typ) {
@@ -48,10 +49,12 @@ public class MoebelhausControl {
 				case "csv":
 					model.leseAusCsvDatei();
 					view.zeigeInformationsfensterAn("CSV Gelesen!");
+    				model.notifyObservers();
 					break;
 				case "txt":
 					model.leseAusTxtDatei();
 					view.zeigeInformationsfensterAn("TXT Gelesen!");
+    				model.notifyObservers();
 					break;
 			}
 		} catch (Exception e) {
@@ -67,6 +70,20 @@ public class MoebelhausControl {
 		} catch (Exception e) {
 			view.zeigeFehlermeldungsfensterAn("Fehler: " + e.getMessage());
 		}
-	} 
+	}
 
+
+	@Override
+	public void update() {
+		
+    	if(model.getMoebelstuecke() != null){
+			for(Moebelstueck m : model.getMoebelstuecke()) {
+				view.txtAnzeige.appendText(
+		    			m.gibMoebelstueckZurueck(' '));
+			}
+		
+	} else{
+		view.zeigeInformationsfensterAn("Bisher wurde keine Moebelstueck aufgenommen!");
+	}
+	}
 }
