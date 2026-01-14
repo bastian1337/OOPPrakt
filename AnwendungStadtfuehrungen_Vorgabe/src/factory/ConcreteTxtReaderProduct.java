@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import business.Moebelstueck;
+import business.Moebelstueck.Moebelstueck;
 
 public class ConcreteTxtReaderProduct extends ReaderProduct {
 

@@ -1,4 +1,4 @@
-package business;
+package business.Moebelstueck;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

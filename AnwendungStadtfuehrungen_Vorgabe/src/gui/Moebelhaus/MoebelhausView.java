@@ -1,6 +1,6 @@
-package gui;
+package gui.Moebelhaus;
 
-import business.Moebelstueck;
+import business.Moebelstueck.Moebelstueck;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

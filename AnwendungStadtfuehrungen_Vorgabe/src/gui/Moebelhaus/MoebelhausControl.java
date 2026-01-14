@@ -1,7 +1,7 @@
-package gui;
+package gui.Moebelhaus;
 
-import business.MoebelhausModel;
-import business.Moebelstueck;
+import business.Moebelstueck.MoebelhausModel;
+import business.Moebelstueck.Moebelstueck;
 import gui.Warenuebersicht.WarenuebersichtView;
 import javafx.stage.Stage;
 import ownUtil.Observer;

@@ -1,4 +1,4 @@
-package business;
+package business.Moebelstueck;
 
 public class Moebelstueck {
 	

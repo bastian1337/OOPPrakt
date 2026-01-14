@@ -1,6 +1,6 @@
 package main;
 
-import gui.MoebelhausControl;
+import gui.Moebelhaus.MoebelhausControl;
 import gui.Warenuebersicht.WarenuebersichtControl;
 import gui.Warenuebersicht.WarenuebersichtView;
 import javafx.application.Application;
