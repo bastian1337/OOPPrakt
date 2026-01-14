@@ -49,12 +49,12 @@ public class MoebelhausControl implements Observer {
 				case "csv":
 					model.leseAusCsvDatei();
 					view.zeigeInformationsfensterAn("CSV Gelesen!");
-    				model.notifyObservers();
+//    				model.notifyObservers();
 					break;
 				case "txt":
 					model.leseAusTxtDatei();
 					view.zeigeInformationsfensterAn("TXT Gelesen!");
-    				model.notifyObservers();
+//    				model.notifyObservers();
 					break;
 			}
 		} catch (Exception e) {
@@ -77,7 +77,9 @@ public class MoebelhausControl implements Observer {
 	public void update() {
 		
     	if(model.getMoebelstuecke() != null){
+			view.txtAnzeige.clear();
 			for(Moebelstueck m : model.getMoebelstuecke()) {
+
 				view.txtAnzeige.appendText(
 		    			m.gibMoebelstueckZurueck(' '));
 			}

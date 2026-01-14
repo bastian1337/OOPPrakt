@@ -153,12 +153,19 @@ public class MoebelhausView {
 		     	control.leseAusDatei("txt");
 		    }
     	});
-	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				control.schreibeMoebelstueckeInCsvDatei();
-			}	
-	    });
+//	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent e) {
+//				control.schreibeMoebelstueckeInCsvDatei();
+//			}	
+//	    });
+//	    mnItmTxtImport.setOnAction(e -> {
+//	    	control.leseAusDatei("Txt");
+//	    });
+	    
+	    mnItmCsvExport.setOnAction(e -> {
+	    	control.schreibeMoebelstueckeInCsvDatei();
+	    });;
     }
    
    public void zeigeInformationsfensterAn(String meldung){

@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
+	// Schrank, Kueche, modern, 449, HolzKunststoff
+	
 	@Override
 	public void start(Stage primaryStage) {
 		new MoebelhausControl(primaryStage);

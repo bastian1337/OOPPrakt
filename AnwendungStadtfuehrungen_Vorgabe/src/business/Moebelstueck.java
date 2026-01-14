@@ -10,11 +10,31 @@ public class Moebelstueck {
     
     public Moebelstueck(String name, String wohnraum, String stil,
        	float preis, String[] materialien){
+    
+    	
     	this.name = name;
       	this.wohnraum = wohnraum;
        	this.stil = stil;
        	this.preis = preis;
        	this.materialien = materialien;
+       	
+    	if(name==null) {
+    		throw new IllegalArgumentException("Name darf nicht null sein!");
+    	}
+    	
+    	if(wohnraum==null) {
+    		throw new IllegalArgumentException("Wohnraum darf nicht null sein!");
+    	}
+    	
+    	if(stil==null) {
+    		throw new IllegalArgumentException("Stil darf nicht null sein!");
+    	}
+    	
+    	if(materialien==null) {
+    		throw new IllegalArgumentException("Materialien darf nicht null sein!");
+    	}
+    	
+    	
     }
 
 	public String getName() {

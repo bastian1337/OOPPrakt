@@ -95,7 +95,9 @@ private MoebelhausModel moebelModel;
 	public void update() {
 		// TODO Auto-generated method stub
 		if(moebelModel.getMoebelstuecke() != null){
+			txtAnzeigeMoebel.clear();
 			for(Moebelstueck m : moebelModel.getMoebelstuecke()) {
+
 				txtAnzeigeMoebel.appendText(
 		    			m.gibMoebelstueckZurueck(' '));
 			}
@@ -105,5 +107,8 @@ private MoebelhausModel moebelModel;
 	}
 
 	}	
+	
+	   
+
     
 }
